@@ -39,6 +39,7 @@ router.AddRegex(":ipv4", `^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$`)
 router.HandleFunc("/static/:uuid/:ipv4", handleUUID, "PUT")
 router.HandleFunc("/static/:ipv4/:uuid", handleIPV$, "GET,HEAD")
 ```
+> As if that were not enough, also with [versioning](/post/versioning/) support
 
 While implementing this, the use of regular expressions was inevitable, but by
 using them where they were not required, they came with a big penalty.
