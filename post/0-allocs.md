@@ -396,7 +396,7 @@ itself and well, to the modest traffic it has been handling.
 While doing some benchmarks and simulating some DDOS I found some patterns. All
 were related to the way the `request.URL.Path` was handled. The thing I noticed
 was that the bigger the request path was the more memory allocations were used.
-At the end was pretty much making sense since by splitting the path by '/' a
+At the end was pretty much making sense since by splitting the path by `/` a
 slice was returned with all the possible parts of the path.
 
 For example, for a request like:
