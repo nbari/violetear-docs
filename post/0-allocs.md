@@ -406,7 +406,7 @@ For example, for a request like:
 ```
 
 
-The router was creating a slice of  10 items:
+The router was creating a slice of 9 items:
 
 ```go
 [ the quick brown fox jumps over the lazy dog]
