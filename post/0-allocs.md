@@ -30,7 +30,7 @@ host.tld/static/127.0.0.1/8E605AD7-554A-450D-A72D-D0098D336E8E
          static                   dynamic        Allow only methods GET and HEAD
 ```
 
-Which could be represented in the router like:
+Which could be represented in the [router like](https://violetear.org/post/how-it-works/):
 
 ```go
 uuid := `[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}`
