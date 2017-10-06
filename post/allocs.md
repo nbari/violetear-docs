@@ -8,7 +8,7 @@ tags= ["benchmark", "profiling", "allocs"]
 
 *Go is fast, but when doing things carefully, besides being faster is very light.*
 
-The history about violetear is not much different from many others - a HTTP
+The history about violetear is not much different from many others - an HTTP
 router capable of handling any requests.
 
 One of the main constraints found at the beginning was how to deal with static
@@ -22,12 +22,12 @@ For example, the need to support this type of requests:
 host.tld/static/8E605AD7-554A-450D-A72D-D0098D336E8E/127.0.0.1
         \_____/\_____________________________________________/
            |                         |
-         static                   dynamic
+         static                   dynamic        Allow only method PUT
 
 host.tld/static/127.0.0.1/8E605AD7-554A-450D-A72D-D0098D336E8E
         \_____/\_____________________________________________/
            |                         |
-         static                   dynamic
+         static                   dynamic        Allow only methods GET and HEAD
 ```
 
 Which could be represented in the router like:
@@ -152,8 +152,9 @@ This basically will make requests in the following way:
 ...
 ```
 
-It is very basic but allows to test the router with both static and dynamic
-handlers.
+It is very basic but allows to test the router with both static
+and dynamic handlers - source code for this can be found
+[here](https://github.com/nbari/go-sandbox/tree/master/profile-violetear/benchmark).
 
 Once everything is setup, the router should be up, running and listening for
 requests, `wrk` is called like mentioned before and in another terminal this
@@ -207,7 +208,7 @@ ROUTINE ======================== github.com/nbari/violetear.(*Router).splitPath 
 (pprof)
 {{< / highlight >}}
 
-Was evident that splitting the path by using a regular expression was the most
+Was evident that splitting the path by using a regular expression was not the most
 efficient way to go. I changed the function to something like this:
 
 ```go
@@ -267,7 +268,7 @@ And run it using:
 
     go test -run=^$ -bench=.
 
-The output was a small win of 3 allocation less:
+The output was a small win of 3 allocation less 🎉
 
 {{< highlight html "linenos=inline,hl_lines=9 14" >}}
 $ go test -run=^$ -bench=.
@@ -329,7 +330,7 @@ profiled and a stack trace printed on each object's allocation and free.
 To build the tests:
 
 ```sh
-    $ go test -c
+go test -c
 ```
 
 And to run the tests writing to a file all the output:
@@ -424,22 +425,28 @@ key := "the"
 path := "/quick/brown/fox/jumps/over/the/lazy/dog"
 ```
 
-It searches for a possible handler named `the` and if not will try again using
-`/the/quick`:
+It searches for a possible handler named `the` and if found then next will try again using
+`quick` and shorting the path to `/brown/fox/jumps/over/the/lazy/dog`:
 
 ```go
 key := "quick"
 path := "/brown/fox/jumps/over/the/lazy/dog"
+
+key := "brown"
+path := "/fox/jumps/over/the/lazy/dog"
+
+key := "fox"
+path := "/jumps/over/the/lazy/dog"
 ```
 
-Ans so on until a handler matches the `key` or a 404 is returned.
+And so on until a handler matches the `key` or a [404 is returned](/post/notfoundhandler/).
 
 This by principle made the router more efficient but now the challenge was how
 to parse the path without creating allocations.
 
 The tricky part was to avoid concatenating strings runes or bytes, by just using
 the existing path and return chunks of the slice did the trick, the current code
-is this:
+look like is this:
 
 {{< highlight go "linenos=inline" >}}
 func (t *Trie) SplitPath(path string) (string, string) {
@@ -470,8 +477,10 @@ func (t *Trie) SplitPath(path string) (string, string) {
 
 The router now is faster and static routes are 0% fat 🚀.
 
-There is still work in progress, who will think that behind a simple router; there
-is too much logic evolved. The experience so far has been very pleasant,
-learning and improving every day more about go and its niceties.
+There is still work in progress - who would think that behind a simple router
+there is too much logic involved. The experience so far has been very pleasant,
+learning and improving every day more about [Go](https://golang.org/) and its
+niceties.
 
-To make an even better improvement, any tips, comments or a review will be more than welcome 🙏
+To make an even better improvement, any tips, comments or a review will be more
+than welcome 🙏
