@@ -8,12 +8,12 @@ tags= ["benchmark", "profiling", "allocs"]
 
 *Go is fast, but when doing things carefully, besides being faster is very light.*
 
-The history about [violetear](https://github.com/nbari/violetear/) is not much
-different from many others - an HTTP router capable of handling any requests.
+[violetear's](https://github.com/nbari/violetear/) history is not very
+different from many others. It is an HTTP router capable of handling any requests.
 
-One of the main constraints found at the beginning was how to deal with static
-and dynamic URL's. Let's face it, if you want to replace an important component of
-your current architecture you should try to break as less as possible - highly
+One of violetear's main constraints is how to deal with static and dynamic
+URL's. Let's face it, if you want to replace an important component of your
+current architecture you should try to break as less as possible - highly
 trained monkeys hate changes. 🐒
 
 For example, the need to support this type of requests:
