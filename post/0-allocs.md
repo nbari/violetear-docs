@@ -1,5 +1,5 @@
 +++
-title= "Benchmarks and profiling"
+title= "The journey to achieve 0 allocations"
 date = "2017-03-11T11:03:40+02:00"
 description = "0 B/op          0 allocs/op"
 tags= ["benchmark", "profiling", "allocs"]
