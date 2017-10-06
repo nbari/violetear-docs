@@ -152,8 +152,8 @@ This basically will make requests in the following way:
 ...
 ```
 
-It is very basic but allows to test the router with both static
-and dynamic handlers - source code for this can be found
+It is very basic. This script will test the router with both static and dynamic
+handlers - source code for this can be found
 [here](https://github.com/nbari/go-sandbox/tree/master/profile-violetear/benchmark).
 
 Once everything is setup, the router should be up, running and listening for
@@ -208,8 +208,8 @@ ROUTINE ======================== github.com/nbari/violetear.(*Router).splitPath 
 (pprof)
 {{< / highlight >}}
 
-Was evident that splitting the path by using a regular expression was not the most
-efficient way to go. I changed the function to something like this:
+This showed that splitting the path using a regular expression was inefficient.
+I changed the function to something like this:
 
 ```go
 func (r *Router) splitPath(p string) []string {
