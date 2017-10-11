@@ -363,6 +363,25 @@ PASS
 ok      github.com/nbari/violetear      3.507s
 {{< / highlight >}}
 
+go-torch 🔥
+
+To have a better graphical representation about the profiling output
+[go-torch](https://github.com/uber/go-torch) is an excellent tool for creating
+flame graphs.
+
+The easiest way to run it is like this:
+
+```sh
+$ docker run uber/go-torch -u http://[address-of-host] -p > torch.svg
+```
+> user the IP/address of your host, not localhost or 127.0.0.1
+
+This is an example of how it was behaving the router before:
+
+![torch before](/img/torch-before.svg)
+
+After:
+![torch after](/img/torch-after.svg)
 
 # 0 allocations
 
@@ -388,8 +407,6 @@ BenchmarkRouterDynamic-4        2017/10/05 21:57:33 Adding path: /test/:word [GE
 PASS
 ok      github.com/nbari/violetear      4.144s
 {{< / highlight >}}
-
-
 
 The router since always has been behaving quite well, this mainly thanks to Go
 itself and well, to the modest traffic it has been handling.
