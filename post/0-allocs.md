@@ -62,7 +62,7 @@ func (r *Router) splitPath(p string) []string {
 }
 {{< / highlight >}}
 
-# pprof
+### pprof <a name="pprof"></a> [¶]({{< ref "#pprof" >}})
 
 Go comes with "batteries included" and is very easy to start profiling the code by the
 use of the package [pprof](https://golang.org/pkg/net/http/pprof/).
@@ -112,6 +112,8 @@ r.HandleFunc("/debug/pprof/profile", pprof.Profile)
 r.HandleFunc("/debug/pprof/symbol", pprof.Symbol)
 r.HandleFunc("/debug/pprof/trace", pprof.Trace)
 ```
+
+### wrk <a name="wrk"></a> [¶]({{< ref "#wrk" >}})
 
 For making some random requests, `wrk` + `lua` do a nice combo, this is the
 command I used for testing:
@@ -363,7 +365,7 @@ PASS
 ok      github.com/nbari/violetear      3.507s
 {{< / highlight >}}
 
-go-torch 🔥
+### go-torch 🔥 <a name="go-torch"></a> [¶]({{< ref "#go-torch" >}})
 
 To have a better graphical representation about the profiling output
 [go-torch](https://github.com/uber/go-torch) is an excellent tool for creating
