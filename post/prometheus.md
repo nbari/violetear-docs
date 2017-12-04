@@ -5,7 +5,7 @@ tags= ["prometheus", "metrics"]
 description= "/metrics"
 +++
 
-Basic [prometheus](prometheus.io)example with [HTTP Basic authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) for the `/metrics` endpoint:
+Basic [prometheus](prometheus.io) example with [HTTP Basic authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) for the `/metrics` endpoint:
 
 ```go
 package main
@@ -99,3 +99,5 @@ func main() {
 	log.Fatal(srv.ListenAndServe())
 }
 ```
+
+gist: https://gist.github.com/nbari/04ce9bf4080e52951aedd1fced0a16bd
