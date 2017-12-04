@@ -1,6 +1,6 @@
 +++
 title= "Websocket Hijack"
-date = "2017-03-11T11:03:41+02:00"
+date = "2017-03-11T11:03:42+02:00"
 description = "Hijack, Flusher"
 tags= ["Hijack", "websocket"]
 +++
