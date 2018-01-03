@@ -14,7 +14,7 @@ endpoint := violetear.GetRouteName(r)
 c.WithLabelValues(endpoint).Observe(time.Since(start).Seconds())
 ```
 
-This helps to create the labels using the defined names.
+This helps to create the labels using the defined names when creating the route.
 
 ```go
 package main
