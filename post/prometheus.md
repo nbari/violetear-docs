@@ -7,6 +7,15 @@ description= "/metrics"
 
 Basic [prometheus](prometheus.io) example with [HTTP Basic authentication](https://en.wikipedia.org/wiki/Basic_access_authentication) for the `/metrics` endpoint:
 
+Notice the use of `.Name("endpoint")` and `GetRouteName`:
+
+```go
+endpoint := violetear.GetRouteName(r)
+c.WithLabelValues(endpoint).Observe(time.Since(start).Seconds())
+```
+
+This helps to create the labels using the defined names.
+
 ```go
 package main
 
@@ -61,7 +70,8 @@ func counterMW(c *prometheus.HistogramVec) middleware.Constructor {
 			// do something here
 			next.ServeHTTP(w, r)
 			log.Println("updating prometheus counters")
-			c.WithLabelValues(r.URL.Path).Observe(time.Since(start).Seconds())
+			endpoint := violetear.GetRouteName(r)
+			c.WithLabelValues(endpoint).Observe(time.Since(start).Seconds())
 		})
 	}
 }
@@ -79,9 +89,9 @@ func main() {
 	stdChain := middleware.New(counterMW(counter), secondMW)
 
 	router := violetear.New()
-	router.Handle("/", stdChain.ThenFunc(index))
-	router.Handle("/foo", stdChain.ThenFunc(foo), "GET")
-	router.Handle("/bar", stdChain.ThenFunc(bar), "POST")
+	router.Handle("/", stdChain.ThenFunc(index)).Name("root")
+	router.Handle("/foo", stdChain.ThenFunc(foo), "GET").Name("foo")
+	router.Handle("/bar", stdChain.ThenFunc(bar), "POST").Name("bar")
 	router.Handle("/metrics", BasicAuth(prometheus.Handler(),
 		"user",
 		"password",
