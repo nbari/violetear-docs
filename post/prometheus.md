@@ -9,10 +9,8 @@ Basic [prometheus](prometheus.io) example with [HTTP Basic authentication](https
 
 Notice the use of `.Name("endpoint")` and `GetRouteName`:
 
-```go
-endpoint := violetear.GetRouteName(r)
-c.WithLabelValues(endpoint).Observe(time.Since(start).Seconds())
-```
+    endpoint := violetear.GetRouteName(r)
+    c.WithLabelValues(endpoint).Observe(time.Since(start).Seconds())
 
 This helps to create the labels using the defined names when creating the route.
 
