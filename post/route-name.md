@@ -37,7 +37,7 @@ when creating the route the method `GetError()` can be used, for example:
 
 ```go
 router.Handle("*", catchAll, "ALL").New("*")
-if err := GetError(); err != nil {
+if err := router.GetError(); err != nil {
     log.Fatal(err)
 }
 ```
