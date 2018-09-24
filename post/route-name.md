@@ -10,10 +10,10 @@ To be available to know the name of the route within the handler, the `.New` met
 ```go
 router := violetear.New()
 
-router.Handle("*", catchAll, "ALL").New("*")
-router.HandleFunc("/post", methodPOST, "POST").New("post")
-router.HandleFunc("/get", methodALL, "GET").New("get")
-router.HandleFunc("/:any", methodRX).New("rx")
+router.Handle("*", catchAll, "ALL").Name("*")
+router.HandleFunc("/post", methodPOST, "POST").Name("post")
+router.HandleFunc("/get", methodALL, "GET").Name("get")
+router.HandleFunc("/:any", methodRX).Name("rx")
 ```
 
 To retrieve the name within the handler this could be used:
@@ -36,7 +36,7 @@ to be available to set a `Name` per route, therefore to know if an error occurre
 when creating the route the method `GetError()` can be used, for example:
 
 ```go
-router.Handle("*", catchAll, "ALL").New("*")
+router.Handle("*", catchAll, "ALL").Name("*")
 if err := router.GetError(); err != nil {
     log.Fatal(err)
 }
