@@ -5,7 +5,7 @@ tags= ["route", "name"]
 description= '.Name("route") & GetError()'
 +++
 
-To be available to know the name of the route within the handler, the `.New` method can be used, example:
+To be available to know the name of the route within the handler, the `.Name` method can be used, example:
 
 ```go
 router := violetear.New()
