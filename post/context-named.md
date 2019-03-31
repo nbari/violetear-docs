@@ -49,7 +49,7 @@ func main() {
     router := violetear.New()
 
     uuid := `[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}`
-    router.AddRegex(":uuid")
+    router.AddRegex(":uuid", uuid)
 
     router.HandleFunc("*", catchAll)
     router.HandleFunc("/:uuid", handleUUID, "GET,HEAD")
@@ -103,7 +103,7 @@ After defining this dynamic routes:
 
 ```go
 uuid := `[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}`
-router.AddRegex(":uuid")
+router.AddRegex(":uuid", uuid)
 router.HandleFunc("/test/:uuid/:uuid", handleUUID, "GET,HEAD")
 ```
 
